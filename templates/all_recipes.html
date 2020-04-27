@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Zach's Recipes</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/heroic-features.css" rel="stylesheet">
+
+  <!--Link for tab icon-->
+  <link rel="icon" href="https://img.pngio.com/food-icons-3000-free-files-in-png-eps-svg-format-food-icon-png-512_512.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>  
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Zach's Recipes</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">All Recipes</h1>
+      <p class="lead">Below is an up-to-date list of all the recipes currently in the database, along with all of the information provided for each recipe.</p>
+    </header>
+
+    <!-- Page Features -->
+    <div class="container center_div">
+      <input id="myInput" type="text" placeholder="Search..">
+      <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Cuisine Type</th>
+                <th>Main Ingredient</th>
+                <th>Cooking Time (Minutes)</th>
+                <th>Recipe Hyperlink</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            {% for item in recipeQuery %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.cuisine }}</td>
+                <td>{{ item.ingredients }}</td>
+                <td>{{ item.cooking_time }}</td>
+                <td><a href="{{item.hyperlink}}" target="_blank">Link</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Zach Lawlor 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

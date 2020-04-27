@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Zach's Recipes</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/static/css/heroic-features.css" rel="stylesheet">
+
+  <!--Link for tab icon-->
+  <link rel="icon" href="https://img.pngio.com/food-icons-3000-free-files-in-png-eps-svg-format-food-icon-png-512_512.png">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Zach's Recipes</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/sources">Recipe Sources</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Welcome To The Recipe Database!</h1>
+      <p class="lead">This application is used for various purposes in order to store, search, and return recipes.</p>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center">
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="https://djdo2py1q6zlg.cloudfront.net/magazine/wp-content/uploads/2019/11/Chef-Chan-Yan-Tak-bw-500x325.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Add New Recipe</h4>
+            <p class="card-text">Click button below to add a new recipe to the database.</p>
+          </div>
+          <div class="card-footer">
+            <a href="/post" class="btn btn-primary">Add New Recipe</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="data:image/jpeg;base64,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" alt="">
+          <div class="card-body">
+            <h4 class="card-title">View All Recipes</h4>
+            <p class="card-text">Click button below to view all recipes currently in the database</p>
+          </div>
+          <div class="card-footer">
+            <a href="/view_all" class="btn btn-primary">View All Recipes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="https://djdo2py1q6zlg.cloudfront.net/magazine/wp-content/uploads/2019/11/making-a-masterdish-500x325.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Recipes By Cuisine</h4>
+            <p class="card-text">Click the dropdown below to view all recipes grouped by cuisine type.</p>
+          </div>
+          <div class="card-footer">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cuisines
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for item in cuisines %}
+                <a class="dropdown-item" href="/view/{{item}}">{{item}}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="https://www.olgasflavorfactory.com/wp-content/uploads/2013/07/IMG_5619-500x325.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Recipes By Main Ingredient</h4>
+            <p class="card-text">Click the dropdown below to view all recipes grouped by main ingredient type.</p>
+          </div>
+          <div class="card-footer">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Main Ingredients
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for item in ingredientList %}
+                <a class="dropdown-item" href="/view/main/{{item}}">{{item}}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="https://www.artisansofleisure.com/wp-content/uploads/2015/06/Lima_food-tours-500x325.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Random Recipe</h4>
+            <p class="card-text">Click button below to generate a random recipe.</p>
+          </div>
+          <div class="card-footer">
+            <a href="/random" class="btn btn-primary">Random Recipe</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Zach Lawlor 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
