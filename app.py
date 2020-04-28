@@ -53,7 +53,7 @@ class sources(db.Model):
     def __repr__(self):
         return '<Recipe %r>' % self.name
 
-
+# Define schema for recipe_list table
 class recipeSchema(Schema):
     id = fields.Int()
     name = fields.Str()
