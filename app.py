@@ -74,10 +74,12 @@ def index():
     db.session.close()
     return render_template('index.html', cuisines=cuisines, ingredientList=ingredientList)
 
+
 @app.route('/post')
 def post():
     return render_template('post_recipe.html')
 
+# api route to post new recipe to database. Page will be redirected to "/post" that has HTML template
 @app.route('/post_recipe', methods=['POST', 'GET'])
 def post_recipe():
     recipeValue = request.form['recipe_name']
