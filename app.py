@@ -83,28 +83,42 @@ def index():
 
 @app.route('/post')
 def post():
+    # Renders html template for posting new recipe
     return render_template('post_recipe.html')
 
 # api route to post new recipe to database. Page will be redirected to "/post" that has HTML template
 @app.route('/post_recipe', methods=['POST', 'GET'])
 def post_recipe():
+    # Requests values from html form with the ID "recipe_name"
     recipeValue = request.form['recipe_name']
+    #Converts the value of recipe name to uppercase. This is the desired format within the database.
     upperRecipe = recipeValue.upper()
+    # Formats the values to be appended to the DB
     new_recipe = recipe_list(upperRecipe, request.form['cuisine'], request.form['cooking_time'], request.form['ingredients'] ,request.form['hyperlink'])
     print(new_recipe)
+    # Adds new recipe to DB
     db.session.add(new_recipe)
+    # Commits new addition to DB
     db.session.commit()
+    # Redirects the page to render an HTML template
     return redirect(url_for('post'))
 
+# Defines API route and page for viewing all recipes currently in the DB
 @app.route('/view_all')
 def all_recipes():
+    # Queries the database, returns all values ordered by recipe name field
     recipeQuery = recipe_list.query.order_by(recipe_list.name).all()
+    # Renders template for tabular view of all recipes
     return render_template('all_recipes.html', recipeQuery=recipeQuery)
 
+# Defines API dynamic route and page for viewing specific type of cuisine. Fed by dropdown on landing page.
 @app.route('/view/<cuisineType>')
 def query(cuisineType):
+    # Takes the input cuisine and capitalizes first letter. This follows format in DB.
     newUpper = cuisineType.capitalize()
+    # Queries database for specified cuisine type and returns ordered list.
     cuisineQuery = recipe_list.query.order_by(recipe_list.name).filter_by(cuisine=newUpper)
+    # Renders template for tabular view, similar to all_recipes.
     return render_template('cuisines.html', cuisineQuery=cuisineQuery)
 
 @app.route('/view/main/<ingredient>')
