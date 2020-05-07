@@ -121,32 +121,50 @@ def query(cuisineType):
     # Renders template for tabular view, similar to all_recipes.
     return render_template('cuisines.html', cuisineQuery=cuisineQuery)
 
+# Create dynamic API route for main ingredient type
 @app.route('/view/main/<ingredient>')
 def ingredientSearch(ingredient):
+    # Query database for all recipes that share a similar main ingredient.
     ingredientQuery = recipe_list.query.order_by(recipe_list.name).filter_by(ingredients=ingredient)
+    # Render html template for for tabular view of recipes.
     return render_template('main_ingredient.html', ingredientQuery=ingredientQuery)
 
+# Create API route for viewing a random recipe
 @app.route('/random')
 def random_recipe():
+    # Query the database for all recipes and then select a random one from the query.
     randomRecipe = choice(recipe_list.query.all())
+    # Render template for random recipe view
     return render_template('random_recipe.html', randomRecipe=randomRecipe)
 
+#Define API route for recipe sources. This references a different table within the database called "sources"
 @app.route('/sources', methods=['POST', 'GET'])
 def add_sources():
+    # Query the databse for all sources and order by website name
     sourceQuery = sources.query.order_by(sources.website).all()
+    # Render template for source tabular view
     return render_template('source_page.html', sourceQuery=sourceQuery)
 
+# Create API route to post a new source
 @app.route('/post_source')
 def post_source():
+    # Render template for posting new source. Redirected from '/post_recipe_source'
     return render_template('post_source.html')
 
+# Create API route to post a new source
 @app.route('/post_recipe_source', methods=['POST'])
 def post_recipe_source():
+    # Pull data from HTML form
     recipeSource = request.form['source_name']
+    # Convert recipe source to uppercase. Database standard
     upperSource = recipeSource.upper()
+    # Format inputted data for database commit
     new_source = sources(upperSource, request.form['hyperlink'])
+    # Add data to DB
     db.session.add(new_source)
+    # Commit changes to DB
     db.session.commit()
+    # Redirect to html page
     return redirect(url_for('post_source'))
 
 
