@@ -113,7 +113,7 @@ def random_recipe():
 
 @app.route('/sources', methods=['POST', 'GET'])
 def add_sources():
-    sourceQuery = sources.query.all()
+    sourceQuery = sources.query.order_by(sources.website).all()
     return render_template('source_page.html', sourceQuery=sourceQuery)
 
 @app.route('/post_source')
