@@ -64,14 +64,20 @@ class recipeSchema(Schema):
 
 recipe_schema = recipeSchema(many=True)
 
-# Create landing page
+# Create landing or "Home" page
 @app.route('/')
 def index():
+    # Query the recipe_list database for distinct cuisine types
     cuisineQuery = recipe_list.query.with_entities(recipe_list.cuisine).distinct()
+    # Create list containing all distinct cuisine types in database to be used by dropdown list
     cuisines = sorted([row.cuisine for row in cuisineQuery])
+    # Query the database for distinct main ingredient types
     ingredientListQuery = recipe_list.query.with_entities(recipe_list.ingredients).distinct()
+    # Create list containing all distinct main ingredient types to be used by dropdown list
     ingredientList = sorted([row.ingredients for row in ingredientListQuery])
+    # Clost the database session
     db.session.close()
+    # Return the html teplate to be used by this page. Carry over cuisine and main ingredient lists
     return render_template('index.html', cuisines=cuisines, ingredientList=ingredientList)
 
 
