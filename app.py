@@ -171,13 +171,10 @@ def post_recipe_source():
 
 @app.route('/data', methods=["GET"])
 def data():
-    authors = recipe_list.query.all()
-    # Serialize the queryset
-    result = recipe_schema.dump(authors)
-    testDict = {"recipes": result}
-    dict2 = testDict.values()
-    dict3 = dict()
-    return testDict
+    cuisineDistinctQuery = recipe_list.query.with_entities(recipe_list.cuisine).distinct()
+    cuisinesList = sorted([row.cuisine for row in cuisineDistinctQuery])
+    print(cuisinesList)
+    return str(cuisinesList)
    
     
 
