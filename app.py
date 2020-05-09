@@ -64,6 +64,8 @@ class recipeSchema(Schema):
 
 recipe_schema = recipeSchema(many=True)
 
+
+
 # Create landing or "Home" page
 @app.route('/')
 def index():
@@ -110,6 +112,14 @@ def all_recipes():
     recipeQuery = recipe_list.query.order_by(recipe_list.name).all()
     # Renders template for tabular view of all recipes
     return render_template('all_recipes.html', recipeQuery=recipeQuery)
+
+# Defines api route to delete row in table
+@app.route('/delete/<name>', methods=['POST', 'GET'])
+def deleteRow(name):
+    recipe_list.query.filter_by(name=name).delete()
+    db.session.commit()
+    #Redirect to all recipe page
+    return redirect(url_for('all_recipes'))
 
 # Defines API dynamic route and page for viewing specific type of cuisine. Fed by dropdown on landing page.
 @app.route('/view/<cuisineType>')

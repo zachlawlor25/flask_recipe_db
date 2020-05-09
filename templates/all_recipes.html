@@ -74,6 +74,7 @@
                 <th>Main Ingredient</th>
                 <th>Cooking Time (Minutes)</th>
                 <th>Recipe Hyperlink</th>
+                <th>Delete Recipe</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -84,6 +85,7 @@
                 <td>{{ item.ingredients }}</td>
                 <td>{{ item.cooking_time }}</td>
                 <td><a href="{{item.hyperlink}}" target="_blank">Link</a></td>
+                <td><form action="/delete/{{ item.name }}" method="post"><input type="submit" class="btn btn-primary" value="Delete"></form></td>
             </tr>
             {% endfor %}
         </tbody>
