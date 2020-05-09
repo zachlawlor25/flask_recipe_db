@@ -7,7 +7,7 @@ from random import choice, random
 import json
 from flask import jsonify
 from marshmallow import Schema, fields, ValidationError, pre_load, pprint
-
+import random
 
 
 # define the app
@@ -181,10 +181,19 @@ def post_recipe_source():
 
 @app.route('/data', methods=["GET"])
 def data():
+    # Query for distinct cuisines
     cuisineDistinctQuery = recipe_list.query.with_entities(recipe_list.cuisine).distinct()
+    # Create List from distinct query
     cuisinesList = sorted([row.cuisine for row in cuisineDistinctQuery])
-    print(cuisinesList)
-    return str(cuisinesList)
+    # Blank list to contain counts of cuisine types
+    counts = []
+    # Blank list to contain random colors generates
+    colors = []
+    for value in cuisinesList:
+        count = recipe_list.query.filter_by(cuisine=value).count()
+        counts.append(count)
+        colors.append("#{:06x}".format(random.randint(0, 0xFFFFFF)))
+    return render_template('chart_test.html', counts=counts, cuisinesList=cuisinesList, colors=colors)
    
     
 
