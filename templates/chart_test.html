@@ -56,11 +56,11 @@
 
     <!-- Page Features -->
     <div class="container center_div">
-      <h3>Cuisine Types in Database</h3>
-      <canvas id="myChart" width="400" height="200"></canvas>
+      <h3>Cuisine Types</h3>
+      <canvas id="cuisine" width="400" height="200"></canvas>
       <script>
       var myData = [{% for item in counts %}"{{item}}",{% endfor %}]
-      var ctx = document.getElementById('myChart');
+      var ctx = document.getElementById('cuisine');
       var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -70,6 +70,35 @@
                   data: myData,
                   backgroundColor: [{% for item in colors %}"{{item}}",{% endfor %}],
                   borderColor: [{% for item in colors %}"{{item}}",{% endfor %}],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+      </script>
+<br>
+      <h3>Main Ingredient Types</h3>
+      <canvas id="ingredient" width="400" height="200"></canvas>
+      <script>
+      var myData = [{% for item in ingcounts %}"{{item}}",{% endfor %}]
+      var ctx = document.getElementById('ingredient');
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: [{% for item in ingredientsList %}"{{item}}",{% endfor %}],
+              datasets: [{
+                  label: 'Count',
+                  data: myData,
+                  backgroundColor: [{% for item in ingcolors %}"{{item}}",{% endfor %}],
+                  borderColor: [{% for item in ingcolors %}"{{item}}",{% endfor %}],
                   borderWidth: 1
               }]
           },
