@@ -6,7 +6,7 @@ from flask import render_template
 from random import choice, random
 import json
 from flask import jsonify
-from marshmallow import Schema, fields, ValidationError, pre_load, pprint
+#from marshmallow import Schema, fields, ValidationError, pre_load, pprint
 import random
 
 
@@ -54,7 +54,7 @@ class sources(db.Model):
         return '<Recipe %r>' % self.name
 
 
-class recipeSchema(Schema):
+""" class recipeSchema(Schema):
     id = fields.Int()
     name = fields.Str()
     cuisine = fields.Str()
@@ -62,7 +62,7 @@ class recipeSchema(Schema):
     hyperlink = fields.Str()
     ingredients = fields.Str()
 
-recipe_schema = recipeSchema(many=True)
+recipe_schema = recipeSchema(many=True) """
 
 
 
