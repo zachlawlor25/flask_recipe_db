@@ -6,6 +6,7 @@ from flask import render_template
 from random import choice, random
 import json
 from flask import jsonify
+from flask import flash
 #from marshmallow import Schema, fields, ValidationError, pre_load, pprint
 import random
 
@@ -98,6 +99,9 @@ def post_recipe():
     # Formats the values to be appended to the DB
     new_recipe = recipe_list(upperRecipe, request.form['cuisine'], request.form['cooking_time'], request.form['ingredients'] ,request.form['hyperlink'])
     print(new_recipe)
+    if not len(upperRecipe) >= 1:
+        flash("Recipe Name Must Be Present")
+        return(request.url)
     # Adds new recipe to DB
     db.session.add(new_recipe)
     # Commits new addition to DB
@@ -208,10 +212,46 @@ def data():
         ingcolors.append("#{:06x}".format(random.randint(0, 0xFFFFFF)))
     return render_template('chart_test.html', counts=counts, cuisinesList=cuisinesList, colors=colors, ingredientsList=ingredientsList, ingcounts=ingcounts, ingcolors=ingcolors)
    
-    
+
+# TEST PAGE FOR NEW DASHBOARD    
+@app.route('/dataTest', methods=["GET"])
+def dataTest():
+    # Query for distinct cuisines
+    cuisineDistinctQuery = recipe_list.query.with_entities(recipe_list.cuisine).distinct()
+    # Create List from distinct query
+    cuisinesList = sorted([row.cuisine for row in cuisineDistinctQuery])
+    # Blank list to contain counts of cuisine types
+    counts = []
+    # Blank list to contain random colors generates
+    colors = []
+    for value in cuisinesList:
+        count = recipe_list.query.filter_by(cuisine=value).count()
+        counts.append(count)
+        colors.append("#{:06x}".format(random.randint(0, 0xFFFFFF)))
+
+    # Query for distinct main ingredient
+    ingredientDistinctQuery = recipe_list.query.with_entities(recipe_list.ingredients).distinct()
+    # Create list from distinct ingredient query
+    ingredientsList = sorted([row.ingredients for row in ingredientDistinctQuery])
+    # Blank list to contain counts of cuisine types
+    ingcounts = []
+    # Blank list to contain random colors generates
+    ingcolors = []
+    for value in ingredientsList:
+        count = recipe_list.query.filter_by(ingredients=value).count()
+        ingcounts.append(count)
+        ingcolors.append("#{:06x}".format(random.randint(0, 0xFFFFFF)))
+
+
+
+     # Queries the database, returns all values ordered by recipe name field
+    recipeQuery = recipe_list.query.order_by(recipe_list.name).all()
+
+
+    return render_template('index2.html', counts=counts, cuisinesList=cuisinesList, colors=colors, ingredientsList=ingredientsList, ingcounts=ingcounts, ingcolors=ingcolors, recipeQuery=recipeQuery)
 
 
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
